@@ -1,0 +1,130 @@
+/* 本地字体：字体文件随网站保存，离线打开也可以使用。 */
+@font-face {
+  font-family: "DM Sans";
+  src: url("./fonts/dm-sans-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+}
+
+/* 浅色模式。修改这些变量即可调整页面配色。 */
+:root {
+  --background: #f2f5ef;
+  --ink: #24483a;
+  --accent: #6d8976;
+  --line: rgba(78, 110, 88, 0.18);
+  --glow: rgba(175, 201, 173, 0.17);
+  --selection: #d4e1ce;
+}
+
+/* 自动跟随用户系统，无需手动切换。 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #14231e;
+    --ink: #e6efe3;
+    --accent: #afc5aa;
+    --line: rgba(175, 197, 170, 0.17);
+    --glow: rgba(76, 118, 90, 0.15);
+    --selection: #3d5746;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { color-scheme: light dark; }
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--ink);
+  font-family: "DM Sans", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--selection); color: var(--ink); }
+
+.page {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 104px clamp(28px, 7vw, 112px);
+  background:
+    radial-gradient(ellipse at 50% 43%, var(--glow), transparent 62%),
+    var(--background);
+}
+
+/* 上下细线营造清晰、完整的边界，同时保留宽松的留白。 */
+.page::before,
+.page::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: clamp(28px, 5vw, 80px);
+  right: clamp(28px, 5vw, 80px);
+  height: 1px;
+  background: var(--line);
+  pointer-events: none;
+}
+
+.page::before { top: 40px; }
+.page::after { bottom: 40px; }
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1320px;
+  padding: 26px 0 38px;
+  text-align: center;
+}
+
+.emblem {
+  display: block;
+  flex: 0 0 auto;
+  width: 108px;
+  height: auto;
+  margin-bottom: 45px;
+}
+
+h1 {
+  margin: 0;
+  max-width: 100%;
+  font-size: clamp(56px, 7.4vw, 112px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.signature {
+  width: 48px;
+  height: 2px;
+  margin-top: 42px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+@media (min-width: 1600px) {
+  .emblem { width: 120px; margin-bottom: 50px; }
+  .signature { margin-top: 48px; }
+}
+
+@media (max-width: 900px) {
+  h1 { font-size: clamp(48px, 7.5vw, 68px); }
+  .emblem { width: 98px; margin-bottom: 38px; }
+}
+
+@media (max-width: 600px) {
+  .page { padding: 80px 28px; }
+  .page::before { top: 24px; }
+  .page::after { bottom: 24px; }
+  .identity { padding: 18px 0 28px; }
+  .emblem { width: 94px; margin-bottom: 34px; }
+  h1 { font-size: clamp(36px, 11.8vw, 64px); line-height: 1.12; letter-spacing: -0.04em; }
+  .signature { width: 40px; margin-top: 34px; }
+}

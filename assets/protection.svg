@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" fill="none">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --edge: #66846b;
+      --panel: #e4ecdd;
+      --leaf: #4e7258;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --edge: #a7c1a1;
+        --panel: #223c2f;
+        --leaf: #bfd5b6;
+      }
+    }
+  </style>
+  <!-- 圆润、轴对称、闭合的盾牌；内部为统一底色。 -->
+  <path d="M60 12C75 20 91 23 104 27V60C104 88 87 109 60 128C33 109 16 88 16 60V27C29 23 45 20 60 12Z" fill="var(--panel)" stroke="var(--edge)" stroke-width="1.8" stroke-linejoin="round"/>
+  <!-- 对称的新叶表达健康与生命力。 -->
+  <path d="M60 69C43 70 35 60 35 47C49 47 60 52 60 69ZM60 69C77 70 85 60 85 47C71 47 60 52 60 69Z" fill="var(--leaf)"/>
+  <path d="M60 67V85" stroke="var(--leaf)" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
