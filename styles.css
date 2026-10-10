@@ -4,28 +4,28 @@
   src: url("./fonts/dm-sans-latin.woff2") format("woff2");
   font-style: normal;
   font-weight: 400 500;
-  font-display: swap;
+  font-display: block;
 }
 
 /* 浅色模式。修改这些变量即可调整页面配色。 */
 :root {
-  --background: #f2f5ef;
-  --ink: #24483a;
-  --accent: #6d8976;
-  --line: rgba(78, 110, 88, 0.18);
-  --glow: rgba(175, 201, 173, 0.17);
-  --selection: #d4e1ce;
+  --background: #f0f3f7;
+  --ink: #142c4b;
+  --accent: #657c99;
+  --line: rgba(39, 66, 101, 0.17);
+  --glow: rgba(144, 167, 197, 0.14);
+  --selection: #d0dcea;
 }
 
 /* 自动跟随用户系统，无需手动切换。 */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #14231e;
-    --ink: #e6efe3;
-    --accent: #afc5aa;
-    --line: rgba(175, 197, 170, 0.17);
-    --glow: rgba(76, 118, 90, 0.15);
-    --selection: #3d5746;
+    --background: #0b182b;
+    --ink: #e4ebf4;
+    --accent: #93a7c2;
+    --line: rgba(151, 174, 206, 0.16);
+    --glow: rgba(45, 76, 119, 0.19);
+    --selection: #2d4668;
   }
 }
 
@@ -37,7 +37,7 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--ink);
-  font-family: "DM Sans", Arial, sans-serif;
+  font-family: var(--font-dm-sans, "DM Sans", Arial, sans-serif);
   -webkit-font-smoothing: antialiased;
 }
 

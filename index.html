@@ -4,17 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#f2f5ef" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#14231e" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f0f3f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b182b" media="(prefers-color-scheme: dark)">
   <!-- 浏览器标签页标题：可以直接修改下面的文字。 -->
   <title>Protective Service</title>
+  <!-- 提前读取本地字体；无需联网。 -->
+  <link rel="preload" href="./fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/protection.svg" as="image">
+  <!-- 首屏背景直接适配主题，样式加载期间也保持相同底色。 -->
+  <style>
+    html { color-scheme: light dark; background: #f0f3f7; }
+    @media (prefers-color-scheme: dark) { html { background: #0b182b; } }
+    html.startup-pending .page > * { opacity: 0 !important; }
+    html.startup-fallback {
+      --font-cormorant: Georgia, serif;
+      --font-dm-sans: Arial, sans-serif;
+      --font-grotesk: Arial, sans-serif;
+      --font-mono: monospace;
+    }
+  </style>
+  <!-- 字体和本地图标准备好后一起显示，避免默认字体切换及图标迟到。 -->
+  <script>
+    (() => {
+      if (!document.fonts) return;
+      const root = document.documentElement;
+      root.classList.add("startup-pending");
+      const reveal = () => root.classList.remove("startup-pending");
+      // 文件缺失或加载异常时仍能显示内容，不会一直隐藏页面。
+      const limit = setTimeout(() => {
+        // 超时后保持回退字体，避免迟到的字体再次改变已显示的排版。
+        root.classList.add("startup-fallback");
+        reveal();
+      }, 3000);
+      window.addEventListener("DOMContentLoaded", () => {
+        const fonts = Array.from(document.fonts, font => font.load());
+        const images = Array.from(document.images, image =>
+          typeof image.decode === "function" ? image.decode() : Promise.resolve()
+        );
+        Promise.allSettled([...fonts, ...images])
+          .then(() => document.fonts.ready)
+          .then(() => { clearTimeout(limit); reveal(); }, reveal);
+      }, { once: true });
+    })();
+  </script>
   <link rel="stylesheet" href="./styles.css">
   <link rel="icon" href="./assets/protection.svg" type="image/svg+xml">
 </head>
 <body>
   <main class="page">
     <div class="identity">
-      <!-- 圆润的完整盾牌与新叶，象征周全保护与健康。 -->
+      <!-- 深蓝盾牌与银色四芒星，表达严谨、警觉与周全保护。 -->
       <img class="emblem" src="./assets/protection.svg" alt="" aria-hidden="true" width="120" height="140">
 
       <!-- 页面标题：直接修改这一行即可，不需要修改 CSS。 -->
